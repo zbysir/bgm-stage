@@ -3,23 +3,23 @@
     {
       "title": "前奏",
       "description": "开始，等待主持人讲话",
-      "when_end": "loop",
+      "loop": true,
       "music_file": "1.mp3",
       "volume": 100
     },
     {
       "title": "前奏",
       "description": "主持人开始讲话",
-      "when_end": "loop",
+      "loop": true,
       "music_file": "1.mp3",
-      "volume": 50
+      "volume": 40
     },
     {
       "title": "故事",
       "description": "故事",
-      "when_end": "loop",
+      "loop": true,
       "music_file": "2.mp3",
-      "volume": 50
+      "volume": 40
     }
   ]
 }
