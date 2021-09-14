@@ -19,7 +19,7 @@
       "description": "主持人开始讲话",
       "loop": true,
       "music_file": "02 [故事] Piano Brothers-Canon in D (2 Minute and 30 Second Version).mp3",
-      "volume": 30
+      "volume": 80
     },
     {
       "title": "新娘上台",
@@ -68,7 +68,7 @@
       "description": "故事",
       "loop": true,
       "music_file": "07 [手捧花] 一枝梅 花信 中村由利子.mp3",
-      "volume": 30
+      "volume": 50
     },
     {
       "title": "退场",
