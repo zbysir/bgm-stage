@@ -6,8 +6,10 @@
     </div>
 
     <div class="state-box">
-      <div v-for="(item,index) in stage.state"
+      <div
+          v-for="(item,index) in stage.state"
            class="state-item"
+           @click="playState(index)"
            :class="{'playing': currStateIndex===index}"
       >
         {{ item.title }}
@@ -117,7 +119,6 @@ export default {
         this.audioDom.pause()
         this.playStatus = 'pause'
       }
-
     },
     moveNext() {
       if (this.currStateIndex >= this.stage.state.length - 1) {
@@ -147,26 +148,35 @@ export default {
       } else {
         // 是否在播放，如果在播放则先减为 0
         if (nowState.music_file) {
-          this.moveIt.to(0, 400, (p) => {
+          this.moveIt.to(0, 1, (p) => {
+                console.log('to', p)
+                this.audioDom.volume = p / 100
+
+                if (p === 0) {
+                  this.audioDom.src = wantState.music_file
+                  this.audioDom.play()
+
+                  this.moveIt.to(wantState.volume, 400, (p) => {
+                        console.log('to 2', p)
+                        this.audioDom.volume = p / 100
+                      }
+                  )
+                }
+              }
+          )
+        } else {
+          // 如果没有播放，则直接从音量 0 开始播放
+          this.audioDom.volume = 0
+          this.audioDom.src = wantState.music_file
+          this.audioDom.play()
+
+          this.moveIt.setBase(0).to(wantState.volume, 400, (p) => {
                 console.log('to', p)
                 this.audioDom.volume = p / 100
               }
           )
-
-          await new Promise(resolve => {
-            setTimeout(resolve, 400)
-          })
         }
 
-        this.audioDom.volume = 0
-        this.audioDom.src = wantState.music_file
-
-        this.audioDom.play()
-        this.moveIt.to(wantState.volume, 400, (p) => {
-              console.log('to', p)
-              this.audioDom.volume = p / 100
-            }
-        )
       }
     }
   },
@@ -208,12 +218,15 @@ export default {
        scoped>
 .state-box {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
   .state-item {
     width: 150px;
     box-shadow: 0 15px 35px rgba(50, 50, 93, .07), 0 5px 15px rgba(0, 0, 0, .07);
     background: #fff;
     padding: 15px;
+    margin: 10px;
 
     &.playing {
       background: #adee78;

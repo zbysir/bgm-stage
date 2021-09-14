@@ -4,22 +4,85 @@
       "title": "前奏",
       "description": "开始，等待主持人讲话",
       "loop": true,
-      "music_file": "1.mp3",
+      "music_file": "01 [开场] 惠化洞 吉他指弹.mp3",
       "volume": 100
     },
     {
       "title": "前奏",
       "description": "主持人开始讲话",
       "loop": true,
-      "music_file": "1.mp3",
-      "volume": 40
+      "music_file": "01 [开场] 惠化洞 吉他指弹.mp3",
+      "volume": 30
     },
     {
       "title": "故事",
+      "description": "主持人开始讲话",
+      "loop": true,
+      "music_file": "02 [故事] Piano Brothers-Canon in D (2 Minute and 30 Second Version).mp3",
+      "volume": 30
+    },
+    {
+      "title": "新娘上台",
       "description": "故事",
       "loop": true,
-      "music_file": "2.mp3",
-      "volume": 40
+      "music_file": "03 [新娘上台] astonish.mp3",
+      "volume": 100
+    },
+    {
+      "title": "新娘上台",
+      "description": "故事",
+      "loop": true,
+      "music_file": "03 [新娘上台] astonish.mp3",
+      "volume": 30
+    },
+    {
+      "title": "誓言",
+      "description": "故事",
+      "loop": true,
+      "music_file": "04 [誓言]我心永恒-泰坦尼克号主题曲.mp3",
+      "volume": 30
+    },
+    {
+      "title": "感谢父母",
+      "description": "故事",
+      "loop": true,
+      "music_file": "05 [感谢父母] Frere Jacques.mp3",
+      "volume": 30
+    },
+    {
+      "title": "父母登场",
+      "description": "故事",
+      "loop": true,
+      "music_file": "06 [父母登场].mp3",
+      "volume": 80
+    },
+    {
+      "title": "父母发言",
+      "description": "故事",
+      "loop": true,
+      "music_file": "",
+      "volume": 0
+    },
+    {
+      "title": "手捧花",
+      "description": "故事",
+      "loop": true,
+      "music_file": "07 [手捧花] 一枝梅 花信 中村由利子.mp3",
+      "volume": 30
+    },
+    {
+      "title": "退场",
+      "description": "故事",
+      "loop": true,
+      "music_file": "08 [退场] 李承哲 - My Love.mp3",
+      "volume": 30
+    },
+    {
+      "title": "退场",
+      "description": "故事",
+      "loop": false,
+      "music_file": "08 [退场] 李承哲 - My Love.mp3",
+      "volume": 100
     }
   ]
 }
