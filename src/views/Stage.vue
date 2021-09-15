@@ -1,15 +1,19 @@
 <template>
-  <div>
+  <div class="stage-page">
     <div class="status">
       <span v-if="playStatus==='play'"> 正在播放 </span>
       <span v-else> 暂停中 </span>
+    </div>
+
+    <div class="tips">
+      [←] 播放上一个阶段，[→] 播放下一个阶段，[空格] 播放、暂停。
     </div>
 
     <div class="state-box">
       <div
           v-for="(item,index) in stage.state"
           class="state-item"
-          @click="playState(index)"
+          @click="onItemClick(index)"
           :class="{'playing': currStateIndex===index}"
       >
         <div class="title">
@@ -195,14 +199,18 @@ export default {
         if (nowState.music_file) {
           this.audioDom.stop()
 
-          this.audioDom = AudioX(wantState.music_file, 0)
-          this.audioDom.play()
-          this.audioDom.setVolume(wantState.volume)
+          if (wantState.music_file) {
+            this.audioDom = AudioX(wantState.music_file, 0)
+            this.audioDom.play()
+            this.audioDom.setVolume(wantState.volume)
+          }
         } else {
           // 如果没有播放，则直接从音量 0 开始播放
-          this.audioDom = AudioX(wantState.music_file, 0)
-          this.audioDom.play()
-          this.audioDom.setVolume(wantState.volume)
+          if (wantState.music_file) {
+            this.audioDom = AudioX(wantState.music_file, 0)
+            this.audioDom.play()
+            this.audioDom.setVolume(wantState.volume)
+          }
         }
       }
 
@@ -225,6 +233,20 @@ export default {
         console.log('stage', this.stage)
       } catch (e) {
         alert(e.toString())
+      }
+    },
+    onItemClick(index){
+      // 点击播放
+      if (index!==this.currStateIndex){
+        this.playState(index)
+        return
+      }
+
+      // 播放与暂停
+      if (this.audioDom.getPaused()) {
+        this.play()
+      } else {
+        this.pause()
       }
     },
     getFileName(url) {
@@ -274,9 +296,23 @@ export default {
 }
 </script>
 
-
 <style lang="scss"
        scoped>
+
+.stage-page {
+  padding: 30px 10px 10px 10px;
+}
+
+.status {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.tips {
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
 .state-box {
   display: flex;
   flex-wrap: wrap;
@@ -322,5 +358,6 @@ export default {
 
 .btns {
   margin-bottom: 10px;
+  margin-top: 15px;
 }
 </style>
