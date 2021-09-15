@@ -1,14 +1,14 @@
 {
   "state": [
     {
-      "title": "前奏",
-      "description": "开始，等待主持人讲话",
+      "title": "开场",
+      "description": "开场，等待主持人上台讲话",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/01 [开场] 惠化洞 吉他指弹.mp3",
       "volume": 100
     },
     {
-      "title": "前奏",
+      "title": "开场",
       "description": "主持人开始讲话",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/01 [开场] 惠化洞 吉他指弹.mp3",
