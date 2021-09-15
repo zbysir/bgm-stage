@@ -82,7 +82,7 @@ steps:
       docker_image: registry.ap-southeast-1.aliyuncs.com/merry/${DRONE_REPO_NAME}:latest
       start_first: true
       confirm: true
-      timeout: 100
+      timeout: 180
     when:
       branch: master
   - name: rancher-dev

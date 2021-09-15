@@ -8,16 +8,45 @@
     <div class="state-box">
       <div
           v-for="(item,index) in stage.state"
-           class="state-item"
-           @click="playState(index)"
-           :class="{'playing': currStateIndex===index}"
+          class="state-item"
+          @click="playState(index)"
+          :class="{'playing': currStateIndex===index}"
       >
-        {{ item.title }}
+        <div class="title">
+          {{ item.title }}
+          <small>
+            {{ item.volume }} %
+          </small>
+        </div>
 
-        <span>
-          {{ item.music_file }} / {{ item.volume }} %
-        </span>
+        <div
+            v-if="item.description"
+            class="desc">
+          {{ item.description }}
+        </div>
+
+        <div
+            v-if="item.music_file"
+            class="name">
+          {{ getFileName(item.music_file) }}
+        </div>
       </div>
+    </div>
+
+    <div class="btns">
+      <button @click="onEditClick"> Edit</button>
+      <button v-if="showSaveBtn"
+              @click="onEditorSave"> Save
+      </button>
+    </div>
+
+    <div v-if="showEditor">
+      <textarea
+          class="editor-input"
+          v-model="stageText"
+          @input="onEditorChange"
+          @keydown.stop
+      />
     </div>
   </div>
 </template>
@@ -118,6 +147,9 @@ export default {
       playStatus: 'pause',
       currStateIndex: -1,
       audioDom: null,
+      showEditor: false,
+      showSaveBtn: false,
+      stageText: "",
     }
   },
   methods: {
@@ -176,6 +208,31 @@ export default {
 
       this.play()
       this.audioDom.setLoop(wantState.loop)
+    },
+    onEditorChange() {
+      this.showSaveBtn = true
+    },
+    onEditClick() {
+      this.stageText = JSON.stringify(this.stage, null, 4)
+
+      this.showEditor = !this.showEditor
+
+      this.showSaveBtn = false
+    },
+    onEditorSave() {
+      try {
+        this.stage = JSON.parse(this.stageText)
+        console.log('stage', this.stage)
+      } catch (e) {
+        alert(e.toString())
+      }
+    },
+    getFileName(url) {
+      let l = url.lastIndexOf('/')
+      if (l === -1) {
+        return url
+      }
+      return url.substr(l + 1)
     }
   },
   async mounted() {
@@ -183,8 +240,11 @@ export default {
     stage = await stage.json()
     this.stage = stage
 
+
     // 监听 key 事件
     document.onkeydown = (e) => {
+      e.preventDefault()
+
       let key = e.code;
       console.log('keydown', e.code)
       if (key === 'ArrowRight') {
@@ -233,6 +293,34 @@ export default {
     &.playing {
       background: #adee78;
     }
+
+    .title {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .desc {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .name {
+      font-size: 12px;
+      margin-top: 10px;
+      padding-top: 10px;
+
+      border-top: #2c3e50 1px solid;
+    }
   }
+}
+
+.editor-input {
+  width: 100%;
+  max-width: 700px;
+  min-height: 500px;
+}
+
+.btns {
+  margin-bottom: 10px;
 }
 </style>
