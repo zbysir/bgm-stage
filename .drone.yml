@@ -79,7 +79,7 @@ steps:
         from_secret: rancher_secret_key
       url: http://rancher.bysir.top:1080/v1
       service: bgm-state/bgm-state-front
-      docker_image: registry.cn-chengdu.aliyuncs.com/merry/${DRONE_REPO_NAME}:latest
+      docker_image: registry.ap-southeast-1.aliyuncs.com/merry/${DRONE_REPO_NAME}:latest
       start_first: true
       confirm: true
       timeout: 100
@@ -96,7 +96,7 @@ steps:
         from_secret: rancher_secret_key
       url: http://rancher.bysir.top:1080/v1
       service: bgm-state/bgm-state-front
-      docker_image: registry.cn-chengdu.aliyuncs.com/merry/${DRONE_REPO_NAME}:develop
+      docker_image: registry.ap-southeast-1.aliyuncs.com/merry/${DRONE_REPO_NAME}:develop
       start_first: true
       confirm: true
       timeout: 100
