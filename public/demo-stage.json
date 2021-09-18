@@ -29,7 +29,7 @@
       "volume": 100
     },
     {
-      "title": "新娘上台",
+      "title": "新娘上台发言",
       "description": "新娘上台发言",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/03 [新娘上台] astonish.mp3",
@@ -72,14 +72,14 @@
     },
     {
       "title": "退场",
-      "description": "退场环节，支持人讲话",
+      "description": "退场环节，主持人讲话",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/08 [退场] 李承哲 - My Love.mp3",
       "volume": 30
     },
     {
       "title": "退场",
-      "description": "开饭",
+      "description": "开饭，主持人退场",
       "loop": false,
       "music_file": "https://file.inv.lmrone.top/bgm/08 [退场] 李承哲 - My Love.mp3",
       "volume": 100

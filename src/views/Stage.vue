@@ -120,7 +120,7 @@ function AudioX(file, volume) {
       return audioDom.paused
     },
     setVolume(v, cb) {
-      moveIt.to(v, 600, (p) => {
+      moveIt.to(v, 800, (p) => {
         audioDom.volume = p / 100
         if (p === v) {
           cb && cb()
