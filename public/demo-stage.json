@@ -1,84 +1,84 @@
 {
   "state": [
     {
-      "title": "开场",
+      "title": "01 开场",
       "description": "开场，等待主持人上台讲话",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/01 [开场] 惠化洞 吉他指弹.mp3",
       "volume": 100
     },
     {
-      "title": "开场",
+      "title": "02 开场",
       "description": "主持人开始讲话",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/01 [开场] 惠化洞 吉他指弹.mp3",
       "volume": 30
     },
     {
-      "title": "故事",
+      "title": "03 故事",
       "description": "讲故事",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/02 [故事] Piano Brothers-Canon in D (2 Minute and 30 Second Version).mp3",
       "volume": 80
     },
     {
-      "title": "新娘上台",
+      "title": "04 新娘上台",
       "description": "迎接新娘",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/03 [新娘上台] astonish.mp3",
       "volume": 100
     },
     {
-      "title": "新娘上台发言",
+      "title": "05 新娘上台发言",
       "description": "新娘上台发言",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/03 [新娘上台] astonish.mp3",
       "volume": 30
     },
     {
-      "title": "誓言",
+      "title": "06 誓言",
       "description": "双方开始讲誓言",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/04 [誓言]我心永恒-泰坦尼克号主题曲.mp3",
       "volume": 30
     },
     {
-      "title": "感谢父母",
+      "title": "07 感谢父母",
       "description": "感谢父母发言",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/05 [感谢父母] Frere Jacques.mp3",
       "volume": 30
     },
     {
-      "title": "父母登场",
+      "title": "08 父母登场",
       "description": "欢迎父母登场",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/06 [父母登场].mp3",
       "volume": 80
     },
     {
-      "title": "父母发言",
+      "title": "09 父母发言",
       "description": "",
       "loop": true,
       "music_file": "",
       "volume": 0
     },
     {
-      "title": "手捧花",
+      "title": "10 手捧花",
       "description": "",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/07 [手捧花] 一枝梅 花信 中村由利子.mp3",
       "volume": 50
     },
     {
-      "title": "退场",
+      "title": "11 退场",
       "description": "退场环节，主持人讲话",
       "loop": true,
       "music_file": "https://file.inv.lmrone.top/bgm/08 [退场] 李承哲 - My Love.mp3",
       "volume": 30
     },
     {
-      "title": "退场",
+      "title": "12 退场",
       "description": "开饭，主持人退场",
       "loop": false,
       "music_file": "https://file.inv.lmrone.top/bgm/08 [退场] 李承哲 - My Love.mp3",
