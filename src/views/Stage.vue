@@ -11,10 +11,10 @@
 
     <div class="state-box">
       <div
-          v-for="(item,index) in stage.state"
-          class="state-item"
-          @click="onItemClick(index)"
-          :class="{'playing': currStateIndex===index}"
+        v-for="(item,index) in stage.state"
+        class="state-item"
+        @click="onItemClick(index)"
+        :class="{'playing': currStateIndex===index}"
       >
         <div class="title">
           {{ item.title }}
@@ -24,14 +24,20 @@
         </div>
 
         <div
-            v-if="item.description"
-            class="desc">
+          v-if="item.description"
+          class="desc">
           {{ item.description }}
         </div>
 
+        <PlayingLine
+          v-if="item.music_file"
+          :playing="currStateIndex===index && playStatus==='play'"
+          class="playing-line"
+        >
+        </PlayingLine>
         <div
-            v-if="item.music_file"
-            class="name">
+          v-if="item.music_file"
+          class="name">
           {{ getFileName(item.music_file) }}
         </div>
       </div>
@@ -46,15 +52,17 @@
 
     <div v-if="showEditor">
       <textarea
-          class="editor-input"
-          v-model="stageText"
-          @input="onEditorChange"
-          @keydown.stop
+        class="editor-input"
+        v-model="stageText"
+        @input="onEditorChange"
+        @keydown.stop
       />
     </div>
   </div>
 </template>
 <script>
+
+import PlayingLine from "../components/PlayingLine";
 
 function MoveIt(base) {
   let t
@@ -109,15 +117,22 @@ function AudioX(file, volume) {
   let audioDom = new Audio(file)
   audioDom.volume = volume
 
+  let paused = false
+
   return {
     play() {
+      paused = false
       audioDom.play()
+      this.setVolume(100)
     },
     pause() {
-      audioDom.pause()
+      paused = true
+      this.setVolume(0, () => {
+        audioDom.pause()
+      })
     },
     getPaused() {
-      return audioDom.paused
+      return paused
     },
     setVolume(v, cb) {
       moveIt.to(v, 800, (p) => {
@@ -140,6 +155,7 @@ function AudioX(file, volume) {
 
 export default {
   name: 'Stage',
+  components: {PlayingLine},
   props: {
     msg: String,
   },
@@ -235,9 +251,9 @@ export default {
         alert(e.toString())
       }
     },
-    onItemClick(index){
+    onItemClick(index) {
       // 点击播放
-      if (index!==this.currStateIndex){
+      if (index !== this.currStateIndex) {
         this.playState(index)
         return
       }
@@ -268,7 +284,6 @@ export default {
       e.preventDefault()
 
       let key = e.code;
-      console.log('keydown', e.code)
       if (key === 'ArrowRight') {
         this.moveNext()
       } else if (key === 'ArrowLeft') {
@@ -288,7 +303,7 @@ export default {
     }
   },
   beforeDestroy() {
-    if (this.audioDom){
+    if (this.audioDom) {
       this.audioDom.stop()
       delete this.audioDom
     }
@@ -340,12 +355,13 @@ export default {
       margin-bottom: 5px;
     }
 
+    .playing-line {
+      margin-top: 10px;
+    }
+
     .name {
       font-size: 12px;
       margin-top: 10px;
-      padding-top: 10px;
-
-      border-top: #2c3e50 1px solid;
     }
   }
 }
