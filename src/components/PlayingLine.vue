@@ -32,26 +32,26 @@ export default {
     max-width: 8px;
     transform: translate3d(1, 1, 0);
     margin: 0;
-    transition: max-width 0.6s, margin 0.6s;
+    transition: max-width 0.6s ease, margin 0.6s ease;
   }
 
   &.playing {
     .line1, {
       max-width: 1px;
       margin: 0 0 0 6px;
-      animation: 1s 0.5s ease b infinite;
+      animation: 1.4s 0.5s  b infinite;
     }
 
     .line2, {
       max-width: 1px;
       margin: 0 4px;
-      animation: 1s 0.75s ease b infinite;
+      animation: 1.4s 0.75s  b infinite;
     }
 
     .line3 {
       max-width: 1px;
       margin: 0 6px 0 0;
-      animation: 1s 1s ease b infinite;
+      animation: 1.4s 1s  b infinite;
     }
   }
 }

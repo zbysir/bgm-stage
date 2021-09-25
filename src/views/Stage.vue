@@ -118,23 +118,26 @@ function AudioX(file, volume) {
   audioDom.volume = volume
 
   let paused = false
+  let lastVolume = volume
 
   return {
     play() {
       paused = false
-      audioDom.play()
-      this.setVolume(100)
+      if (file) {
+        audioDom.play()
+        this._graduallyVolume(lastVolume)
+      }
     },
     pause() {
       paused = true
-      this.setVolume(0, () => {
+      this._graduallyVolume(0, () => {
         audioDom.pause()
       })
     },
     getPaused() {
       return paused
     },
-    setVolume(v, cb) {
+    _graduallyVolume(v, cb) {
       moveIt.to(v, 800, (p) => {
         audioDom.volume = p / 100
         if (p === v) {
@@ -142,7 +145,12 @@ function AudioX(file, volume) {
         }
       })
     },
+    setVolume(v) {
+      lastVolume = v
+      this._graduallyVolume(v)
+    },
     stop() {
+      paused = true
       this.setVolume(0, () => {
         audioDom.pause()
       })
@@ -206,31 +214,19 @@ export default {
 
       // 调整音量
       if (nowState.music_file === wantState.music_file) {
-        if (nowState.volume === wantState.volume) {
-          return
-        }
         this.audioDom.setVolume(wantState.volume)
+        this.play()
       } else {
         // 是否在播放，如果在播放则先减为 0
         if (nowState.music_file) {
           this.audioDom.stop()
-
-          if (wantState.music_file) {
-            this.audioDom = AudioX(wantState.music_file, 0)
-            this.audioDom.play()
-            this.audioDom.setVolume(wantState.volume)
-          }
-        } else {
-          // 如果没有播放，则直接从音量 0 开始播放
-          if (wantState.music_file) {
-            this.audioDom = AudioX(wantState.music_file, 0)
-            this.audioDom.play()
-            this.audioDom.setVolume(wantState.volume)
-          }
         }
+
+        this.audioDom = AudioX(wantState.music_file, 0)
+        this.audioDom.setVolume(wantState.volume)
+        this.play()
       }
 
-      this.play()
       this.audioDom.setLoop(wantState.loop)
     },
     onEditorChange() {
@@ -340,6 +336,7 @@ export default {
     padding: 15px;
     margin: 10px;
     transition: all 600ms;
+    cursor: pointer;
 
     &.playing {
       background: #adee78;
