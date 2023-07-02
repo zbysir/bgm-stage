@@ -11,10 +11,10 @@
 
     <div class="state-box">
       <div
-        v-for="(item,index) in stage.state"
-        class="state-item"
-        @click="onItemClick(index)"
-        :class="{'playing': currStateIndex===index}"
+          v-for="(item,index) in stage.state"
+          class="state-item"
+          @click="onItemClick(index)"
+          :class="{'playing': currStateIndex===index}"
       >
         <div class="title">
           {{ item.title }}
@@ -24,20 +24,20 @@
         </div>
 
         <div
-          v-if="item.description"
-          class="desc">
+            v-if="item.description"
+            class="desc">
           {{ item.description }}
         </div>
 
         <PlayingLine
-          v-if="item.music_file"
-          :playing="currStateIndex===index && playStatus==='play'"
-          class="playing-line"
+            v-if="item.music_file"
+            :playing="currStateIndex===index && playStatus==='play'"
+            class="playing-line"
         >
         </PlayingLine>
         <div
-          v-if="item.music_file"
-          class="name">
+            v-if="item.music_file"
+            class="name">
           {{ getFileName(item.music_file) }}
         </div>
       </div>
@@ -48,14 +48,17 @@
       <button v-if="showSaveBtn"
               @click="onEditorSave"> Save
       </button>
+      <button v-if="showEditor"
+              @click="onEditorReset"> Reset
+      </button>
     </div>
 
     <div v-if="showEditor">
       <textarea
-        class="editor-input"
-        v-model="stageText"
-        @input="onEditorChange"
-        @keydown.stop
+          class="editor-input"
+          v-model="stageText"
+          @input="onEditorChange"
+          @keydown.stop
       />
     </div>
   </div>
@@ -243,9 +246,19 @@ export default {
       try {
         this.stage = JSON.parse(this.stageText)
         console.log('stage', this.stage)
+
+        localStorage.setItem('stage', this.stageText)
       } catch (e) {
         alert(e.toString())
       }
+    },
+    async onEditorReset() {
+      let stage = await fetch('demo-stage.json')
+      stage = await stage.json()
+      this.stage = stage
+      this.stageText = JSON.stringify(this.stage, null, 4)
+
+      localStorage.removeItem('stage')
     },
     onItemClick(index) {
       // 点击播放
@@ -270,10 +283,14 @@ export default {
     }
   },
   async mounted() {
-    let stage = await fetch('demo-stage.json')
-    stage = await stage.json()
-    this.stage = stage
-
+    let sts = localStorage.getItem('stage')
+    if (sts) {
+      this.stage = JSON.parse(sts)
+    } else {
+      let stage = await fetch('demo-stage.json')
+      stage = await stage.json()
+      this.stage = stage
+    }
 
     // 监听 key 事件
     document.onkeydown = (e) => {
@@ -372,5 +389,11 @@ export default {
 .btns {
   margin-bottom: 10px;
   margin-top: 15px;
+  display: flex;
+  justify-content: center;
+
+  button {
+    margin: 0 5px;
+  }
 }
 </style>
